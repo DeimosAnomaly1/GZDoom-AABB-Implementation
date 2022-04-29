@@ -1,20 +1,14 @@
-class BoundingBox : Thinker
+class BoundingBox : Object
 {
-    class<actor> owner;
-    Vector3 center;
-    float halfdimension;
-    double minX, maxX;
-    double minY, maxY;
-    double minZ, maxZ;
+    float minx, maxx;
+    float miny, maxy;
+    float minz, maxz;
+    vector3 center;
+    vector3 pos;
 
-    bool isPointInsideAABB(actor e) {
-        return (e.pos.x >= minX && e.pos.x <= maxX) &&
-                (e.pos.y >= minY && e.pos.y <= maxY) &&
-                (e.pos.z >= minZ && e.pos.z <= maxZ);
-    }
-    
-    bool isPoint2dInsideAABB(vector2 p) {
-        return (p.x >= minX && p.x <= maxX) &&
-                (p.y >= minY && p.y <= maxY);
+    bool intersect(vector3 a, BoundingBox b) {
+        return (a.x <= b.maxX && a.x >= b.minX) &&
+            (a.y <= b.maxY && a.y >= b.minY) &&
+            (a.z <= b.maxZ && a.z >= b.minZ);
     }
 }
